@@ -1,0 +1,87 @@
+<!doctype html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>tinychat</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.1/css/bulma.min.css">
+    <link rel="stylesheet" href="/styles/style.css" type="text/css">
+</head>
+
+<body>
+    <section class="hero is-primary is-bold">
+        <div class="hero-body">
+            <div class="container">
+                <h1 class="title">
+                    Tiny Chat
+                </h1>
+                <h2 class="subtitle">
+                    <span class="is-size-4">A tiny</span> <span class="is-size-5">tiny</span> <span class="is-size-6">tiny</span> <span class="is-size-7">tiny</span> <span class="is-size-7">tiny chat</span>
+                </h2>
+            </div>
+        </div>
+    </section>
+    <section class="section">
+        <div class="container" ng-app="tinychat" ng-controller="messageCtrl">
+            <div ng-repeat="message in messages | orderBy:'timestamp'">
+                <article class="media message-box">
+                    <figure ng-if="!message.me" class="media-left">
+                        <p class="image is-64x64">
+                            <img ng-src="/images/{{message.avatar}}">
+                        </p>
+                    </figure>
+                    <div class="media-content" ng-class="{'media-content-right' : message.me, 'media-content' : !message.me}" ng-mouseenter="messageHovered = true" ng-mouseleave="messageHovered = false">
+                        <div class="content">
+                            <p>
+                                <span class="has-text-weight-bold" ng-bind="message.author"></span>
+                                <br>
+                                <span ng-if="message.me"></span><span ng-bind="message.content"></span>
+                                <br>
+                                <span ng-show="messageHovered" class="is-size-7" ng-bind="message.timestamp | date:'medium'"></span>
+                                <br>
+                            </p>
+                        </div>
+                    </div>
+                    <figure ng-if="message.me" class="media-right">
+                        <p class="image is-64x64">
+                            <img ng-src="/images/{{message.avatar}}">
+                        </p>
+                    </figure>
+                </article>
+            </div>
+            <article class="media">
+                <figure class="media-left">
+                    <p class="image is-64x64">
+                        <img src="/images/anon.png">
+                    </p>
+                </figure>
+                <div class="media-content">
+                    <div class="field">
+                        <p class="control">
+                            <textarea class="textarea" placeholder="Enter message..." ng-model="formContent"></textarea>
+                        </p>
+                    </div>
+                    <nav class="level">
+                        <div class="level-item">
+                            <div class="field input-name-box">
+                                <div class="control has-icons-left">
+                                    <input class="input" type="text" placeholder="Enter name" ng-model="formUserName">
+                                    <span class="icon is-small is-left">
+                                        <i class="fa fa-user"></i>
+                                    </span>
+                                </div>
+                            </div> 
+                        </div>
+                        <a ng-click="sendMessage()" class="button is-info">Send</a>
+                    </nav>
+                </div>
+            </article>
+        </div> 
+    </section>
+</body>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.5/angular.min.js"></script>
+<script src="/js/app.js" type="text/javascript"></script>
+<script src="/js/messages/controller/messages.controller.js" type="text/javascript"></script>
+<script src="/js/messages/service/messages.service.js" type="text/javascript"></script>
+</html>

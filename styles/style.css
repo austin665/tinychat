@@ -1,0 +1,26 @@
+.clearfix{
+	content: '';
+	clear: both;
+}
+
+.message-box {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgba(219, 219, 219, 0.5);
+}
+
+.media {
+    padding-top: 10px;
+}
+
+.media .media-content-right {
+    text-align: right;
+}
+
+.input-name-box {
+    flex-basis: 45em;
+}
+
+.message-edit {
+    display: none;
+}
